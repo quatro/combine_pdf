@@ -291,8 +291,13 @@ module CombinePDF
     # :Count - Number of nodes in it's subtree (0 if no subtree)
     # :Dest  - node link destination (if the node is linking to something)
     def merge_outlines(old_data, new_data, position)
+
       old_data = actual_object(old_data)
       new_data = actual_object(new_data)
+
+      # Short circuit - ignore the outlines from the new stuff
+      return old_data
+
       if old_data.nil? || old_data.empty? || old_data[:First].nil?
         # old_data is a reference to the actual object,
         # so if we update old_data, we're done, no need to take any further action
